@@ -152,7 +152,7 @@ if authentication_status:
                     fig_bar.update_layout(title="Month-to-Month Expense Comparison", xaxis_title="Month", yaxis_title="Total Expense", xaxis_tickformat='%b' )
 
 
-                    st.write(f'Total: {category_df['Debit'].sum()}')
+                    st.write(f'Total: {category_df["Debit"].sum()}')
                     st.write(category_df)
                     # st.write(monthly_expenses.index)
                     st.plotly_chart(fig_bar)
