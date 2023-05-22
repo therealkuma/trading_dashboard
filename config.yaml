@@ -1,0 +1,69 @@
+cookie:
+  expiry_days: 30
+  key: some_signature_key
+  name: some_cookie_name
+credentials:
+  usernames:
+    bibi:
+      email: bibi@gmail.com
+      name: bi_bi
+      password: $2b$12$oyIY7vTsx26Z1GxM56N2/u0BmLWalfSVxsRn01nYCuWtDj/a6b4cq
+    dada:
+      email: dada@gmail.com
+      name: da_da
+      password: $2b$12$xbSFvJgmb06dDA1wlj8R4eGcLZIcC6MKIfS1Tq06684jpMlw1jGzW
+    dbaldwin:
+      email: dbaldwin@gmail.com
+      name: David Baldwin
+      password: $2b$12$E9/bCaN/r8sN/FV2l8NpgOgspUBAp7UAVU6BgsXJzp/pW8gQWCprC
+    guest:
+      email: testing@gmail.com
+      name: yan lin
+      password: $2b$12$3bCtWjAGKTd2u35Ae0RHHOnwsU0QLthDz07boLM8ZEKi/ZAuZ1sFm
+    haha:
+      email: haha@gmail.com
+      name: ha ha
+      password: $2b$12$8C6CNAHGMktScSUU6L2Wn.4vPEYklE.qhd4HMe4JIQgwpQxsUCTeq
+    hydro:
+      email: hydromusfy@hotmail.com
+      name: hydro lin
+      password: $2b$12$zzpFZ2ydfxlQTIPiK0XRbONK21jLczebIexOML1D3bG3UgNf506iy
+    jingling:
+      email: shijingling@gmail.com
+      name: si_si
+      password: $2b$12$aW8UtgdXk2PPG9urFE.vx.qJtM44xo1KCAKQDqhqhNZtq1oYd4tDC
+    jlin:
+      email: josin@gmail.com
+      name: josin
+      password: $2b$12$zeZhvWRYYruhSRLzmz88UeLUFv9Cn6bRfNwOeQ1n1e2FYRj3iKtA2
+    jsmith:
+      email: jsmith@gmail.com
+      name: John Smith
+      password: $2b$12$c8EZDhvj5AIgqp0CBOaD/.tjIFUaN4v/a95udRS7M50CzPN128Uui
+    kg0380:
+      email: kg0380@gmail.com
+      name: kuma
+      password: '1314'
+    klin:
+      email: kumalign@gmail.com
+      name: kule
+      password: '5240'
+    rbriggs:
+      email: rbriggs@gmail.com
+      name: Rebecca Briggs
+      password: $2b$12$uNaTgvGPG9rMbzOJHYaPQePw0DUfp1qHBrSq6l4O304qani6pKFpm
+    rcouper:
+      email: rcouper@gmail.com
+      name: Ross Couper
+      password: $2b$12$Tir/PbHVmmnt5kgNxgOwMuxNIb2fv2pJ.q71TW8ekvbugCqkye4yu
+    sisi:
+      email: sisi@gmail.com
+      name: jingling
+      password: $2b$12$HkWiPS3G9uo65NseAi9kOu7wnfz4dn4tf.r3nd.g1YPBhUg6pgQS6
+    yumi:
+      email: yumi@gmail.com
+      name: yumi_lin
+      password: $2b$12$C2nhBaQfcQY3VJIign8kNOhrnxLeCE4YwrfGoVOMMbtcbz0VP6Rqa
+preauthorized:
+  emails:
+  - melsby@gmail.com
