@@ -42,6 +42,14 @@ if authentication_status:
         authenticator.logout('Logout', 'main', key='unique_key')
     
         st.write(f'Welcome *{name}*')
+        
+        st.write(f'your expense.csv should have the following column names and orders')
+        st.image("expense_example.png", use_column_width=True)
+        
+        st.write(f'your category.csv should have the following column names and orders and the keyword has to be unique')
+        st.image("category_example.png", use_column_width=True)
+        
+        
         def load_category_mapping(file_path):
             category_mapping = {}
             with open(file_path, 'r') as file:
