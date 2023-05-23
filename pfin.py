@@ -64,7 +64,7 @@ if authentication_status:
                 categorized_expenses.append(header)
 
                 for row in reader:
-                    description = row[1].strip().lower()
+                    description = row[2].strip().lower()
                     category_found = False
                     for keyword, category in category_mapping.items():
                         if keyword in description:
