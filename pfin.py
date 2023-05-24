@@ -108,8 +108,9 @@ if authentication_status:
             st.title("Expense Categorization")
 
             # File upload
-            expenses_file = st.file_uploader("Upload Expenses CSV file", type=["csv"])
-            category_file = st.file_uploader("Upload Category Mapping CSV file", type=["csv"])
+            with st.sidebar:
+                expenses_file = st.file_uploader("Upload Expenses CSV file", type=["csv"])
+                category_file = st.file_uploader("Upload Category Mapping CSV file", type=["csv"])
 
             if expenses_file is not None and category_file is not None:
                 # Create temporary files
