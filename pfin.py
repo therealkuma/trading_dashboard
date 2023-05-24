@@ -7,6 +7,7 @@ from io import BytesIO
 import os
 import plotly.express as px
 import xlrd
+import openpyxl
 
 import streamlit as st
 import streamlit_authenticator as stauth
