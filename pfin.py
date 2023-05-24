@@ -170,7 +170,7 @@ if authentication_status:
 
                     st.write(f'Total: {round(category_df["Amount"].sum(), 2)}')
                     st.write(category_df)
-                    
+                    fig_bar.layout.xaxis.tickvals = pd.date_range('2023-01', '2023-12', freq='MS')
                     st.plotly_chart(fig_bar)
 
 
