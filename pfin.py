@@ -63,46 +63,53 @@ if authentication_status:
                     category_mapping[keyword] = category
             return category_mapping
 
+
         def categorize_expenses(expenses_file, category_mapping_file):
             category_mapping = load_category_mapping(category_mapping_file)
             categorized_expenses = []
 
-            with open(expenses_file, 'r') as expenses:
-                reader = csv.reader(expenses)
-                header = next(reader)
-                header.append("Category")
-                categorized_expenses.append(header)
+            df = pd.read_csv(expenses_file)
+            df.fillna(0, inplace=True)  # Replace NaN values with zero
 
-                for row in reader:
-                    description = row[2].strip().lower()
-                    category_found = False
-                    for keyword, category in category_mapping.items():
-                        if keyword in description:
-                            row.append(category)
-                            categorized_expenses.append(row)
-                            category_found = True
-                            break
-                    if not category_found:
-                        row.append("Uncategorized")
-                        categorized_expenses.append(row)
+            header = df.columns.tolist()
+            if 'Amount' not in header:
+                header.append('Amount')
+                has_amount = False
+            else:
+                has_amount = True
+
+            header.append("Category")
+            categorized_expenses.append(header)
+
+            for index, row in df.iterrows():
+                description = row['Description'].strip().lower()
+
+                if not has_amount:
+                    debit = pd.to_numeric(row['Debit'], errors='coerce')
+                    credit = pd.to_numeric(row['Credit'], errors='coerce')
+                    amount = debit + credit
+                    row['Amount'] = amount
+
+                category_found = False
+                for keyword, category in category_mapping.items():
+                    if keyword in description:
+                        row['Category'] = category
+                        categorized_expenses.append(row.tolist())
+                        category_found = True
+                        break
+                if not category_found:
+                    row['Category'] = "Uncategorized"
+                    categorized_expenses.append(row.tolist())
 
             return categorized_expenses
 
-        def save_categorized_expenses(categorized_expenses, output_file):
-            with open(output_file, 'w', newline='') as output:
-                writer = csv.writer(output)
-                writer.writerows(categorized_expenses)
-
-            print(f"Categorized expenses saved to {output_file}")
 
         def main():
             st.title("Expense Categorization")
 
             # File upload
-            with st.sidebar:
-                expenses_file = st.file_uploader("Upload Expenses CSV file", type=["csv"])
-                category_file = st.file_uploader("Upload Category Mapping CSV file", type=["csv"])
-
+            expenses_file = st.file_uploader("Upload Expenses CSV file", type=["csv"])
+            category_file = st.file_uploader("Upload Category Mapping CSV file", type=["csv"])
 
             if expenses_file is not None and category_file is not None:
                 # Create temporary files
@@ -118,6 +125,9 @@ if authentication_status:
                 temp_category_mapping.close()
 
                 expenses_df = pd.read_csv(temp_expenses.name)
+                expenses_df['Date'] = pd.to_datetime(expenses_df['Date'], dayfirst=True, errors='coerce')
+
+
                 category_mapping_df = pd.read_csv(temp_category_mapping.name)
 
                 # Show uploaded files
@@ -135,16 +145,13 @@ if authentication_status:
                 st.subheader("Categorized Expenses:")
                 st.write(categorized_df)
 
-                # Get unique categories
-                categories = categorized_df['Category'].unique()
-
                 # Draw treemap
-                fig = px.treemap(categorized_df, path=['Category'], values='Debit', color='Debit', hover_data=['Description'])
-                fig.update_layout(title="Expense Treemap")
+                fig = px.treemap(categorized_df, path=['Category'], values='Amount', color='Amount',
+                                 color_continuous_scale='RdBu', title='Expense Amount by Category')
                 st.plotly_chart(fig)
 
-                # Select a category
-                selected_category = st.selectbox("Select a category", categories)
+                # Select category
+                selected_category = st.selectbox("Select a category", categorized_df['Category'].unique())
 
                 if selected_category:
                     # Filter data for the selected category
@@ -152,19 +159,17 @@ if authentication_status:
                     category_df['Date'] = pd.to_datetime(category_df['Date'])
                     category_df.fillna(0)
 
-                    category_df['Debit']=pd.to_numeric(category_df['Debit'])
-
                     # Group by month and calculate total expenses
-                    monthly_expenses = category_df.groupby(category_df['Date'].dt.to_period('M'))['Debit'].sum()
+                    monthly_expenses = category_df.groupby(category_df['Date'].dt.to_period('M'))['Amount'].sum()
 
                     # Draw bar chart for month-to-month comparison
                     fig_bar = px.bar(x=monthly_expenses.index.astype(str), y=monthly_expenses.values)
                     fig_bar.update_layout(title="Month-to-Month Expense Comparison", xaxis_title="Month", yaxis_title="Total Expense", xaxis_tickformat='%b' )
 
 
-                    st.write(f'Total: {round(category_df["Debit"].sum(), 2)}')
+                    st.write(f'Total: {round(category_df["Amount"].sum(), 2)}')
                     st.write(category_df)
-                    # st.write(monthly_expenses.index)
+                    
                     st.plotly_chart(fig_bar)
 
 
