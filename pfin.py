@@ -45,10 +45,10 @@ if authentication_status:
     
         st.write(f'Welcome *{name}*')
         st.title("Expense Categorization App")
-        st.write(f'your expense.csv should have column names Date,Description, Debit and Credit. Amount column can be used if Debit and Credit columns are not available')
+        st.write(f'Your expense.csv should have column names Date,Description, Debit and Credit. You can have an additional Amount Column if Debit and Credit columns has no value')
         st.image("expense_example.png", use_column_width=True)
         
-        st.write(f'your category.csv should have the following column names and orders and the keyword has to be unique')
+        st.write(f'Your category.csv should have the following column names and orders and the keyword has to be unique')
         st.image("category_example.png", use_column_width=True)
         
         
@@ -126,7 +126,7 @@ if authentication_status:
                 temp_category_mapping.close()
 
                 expenses_df = pd.read_csv(temp_expenses.name)
-                expenses_df['Date'] = pd.to_datetime(expenses_df['Date'], dayfirst=True, errors='coerce')
+                # expenses_df['Date'] = pd.to_datetime(expenses_df['Date'], dayfirst=True, errors='coerce')
 
 
                 category_mapping_df = pd.read_csv(temp_category_mapping.name)
