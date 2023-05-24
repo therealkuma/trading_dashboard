@@ -44,8 +44,8 @@ if authentication_status:
         authenticator.logout('Logout', 'main', key='unique_key')
     
         st.write(f'Welcome *{name}*')
-        
-        st.write(f'your expense.csv should have the following column names and orders')
+        st.title("Expense Categorization App")
+        st.write(f'your expense.csv should have column names Date,Description, Debit and Credit. Amount column can be used if Debit and Credit columns are not available')
         st.image("expense_example.png", use_column_width=True)
         
         st.write(f'your category.csv should have the following column names and orders and the keyword has to be unique')
@@ -105,7 +105,7 @@ if authentication_status:
 
 
         def main():
-            st.title("Expense Categorization")
+            
 
             # File upload
             with st.sidebar:
