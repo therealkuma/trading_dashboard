@@ -24,9 +24,9 @@ credentials:
       email: haha@gmail.com
       name: ha ha
       password: $2b$12$8C6CNAHGMktScSUU6L2Wn.4vPEYklE.qhd4HMe4JIQgwpQxsUCTeq
-    hydro:
+    zhaoyue:
       email: hydromusfy@hotmail.com
-      name: hydro lin
+      name: Zhao Yue      
       password: $2b$12$zzpFZ2ydfxlQTIPiK0XRbONK21jLczebIexOML1D3bG3UgNf506iy
     jingling:
       email: shijingling@gmail.com
