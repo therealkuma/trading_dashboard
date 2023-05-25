@@ -82,7 +82,7 @@ if authentication_status:
             categorized_expenses.append(header)
 
             for index, row in df.iterrows():
-                description = row['Description'].strip().lower()
+                #description = row['Description'].strip().lower()
 
                 if not has_amount:
                     debit = pd.to_numeric(row['Debit'], errors='coerce')
