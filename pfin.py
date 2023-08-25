@@ -45,10 +45,10 @@ if authentication_status:
     
         st.write(f'Welcome *{name}*')
         st.title("Expense Categorization App")
-        st.write(f'Your expense.csv should have column names Date,Description, Debit and Credit. You can have an additional Amount Column if Debit and Credit columns has no value')
+        st.write(f'Your expense.csv should have column names Date, Description, Debit and Credit. "Amount" Column can be used if Debit and Credit columns are not available')
         st.image("expense_example.png", use_column_width=True)
         
-        st.write(f'Your category.csv should have the following column names and orders and the keyword has to be unique')
+        st.write(f'Your category.csv should have the following column names Keyword and Category and the keyword has to be unique')
         st.image("category_example.png", use_column_width=True)
         
         
