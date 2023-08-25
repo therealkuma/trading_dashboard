@@ -149,14 +149,30 @@ if authentication_status:
                 # Show categorized expenses
                 st.subheader("Categorized Expenses:")
                 st.write(categorized_df)
-
-                # Draw treemap
-                fig = px.treemap(categorized_df, path=['Category'], values='Amount', color='Amount',
-                                 color_continuous_scale='RdBu', title='Expense Amount by Category')
                 
+                ######################################## Draw treemap   #####################
+                # fig = px.treemap(categorized_df, path=['Category'], values='Amount', color='Amount',
+                #                  color_continuous_scale='RdBu', title='Expense Amount by Category')
+                
+                # st.plotly_chart(fig)
+
+                # Dropdown selector for categorizing the treemap by month
+                category_by_month = st.selectbox("Categorize Treemap by Month:", ['All Periods'] + list(categorized_df['Date'].dt.to_period('M').unique()))
+        
+                # Modify the treemap title based on the selected month
+                if category_by_month != 'All Periods':
+                    filtered_categorized_df = categorized_df[categorized_df['Date'].dt.to_period('M') == category_by_month]
+                    treemap_title = f'Expense Amount by Category for {category_by_month}'
+                else:
+                    filtered_categorized_df = categorized_df
+                    treemap_title = 'Expense Amount by Category'
+        
+                # Create treemap
+                fig = px.treemap(filtered_categorized_df, path=['Category'], values='Amount', color='Amount',
+                                 color_continuous_scale='RdBu', title=treemap_title)
                 st.plotly_chart(fig)
                 
-                # Select category
+                ##### Draw bar chart by monthly categorized expense ###################################
                 selected_category = st.selectbox("Select a category", categorized_df['Category'].unique())
 
                 if selected_category:
