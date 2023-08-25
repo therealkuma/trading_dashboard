@@ -206,8 +206,9 @@ if authentication_status:
                     st.plotly_chart(fig_bar)
                     
                     #### monthly total expense bar chart  ###
-                    total_monthly = categorized_df.groupby(categorized_df['Date'].dt.to_period('M'))
-                    total_monthly= total_monthly[~total_monthly['Description'].str.contains("AUTOPAY")]['Amount'].sum()
+                    categorized_df=categorized_df[~categorized_df['Description'].str.contains("AUTOPAY")]
+                    total_monthly = categorized_df.groupby(categorized_df['Date'].dt.to_period('M'))['Amount'].sum()
+                    
                     # Draw bar chart for month-to-month comparison
                     total_fig_bar = px.bar(x=total_monthly.index.astype(str), y=total_monthly.values)
                     total_fig_bar.update_layout(title="Month-to-Month Total Expense Comparison", xaxis_title="Month", yaxis_title="Total Expense", xaxis_tickformat='%b' )
