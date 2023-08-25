@@ -48,7 +48,7 @@ if authentication_status:
         st.write(f'Your expense.csv should have column names Date, Description, Debit and Credit. "Amount" Column can be used if Debit and Credit columns are not available')
         st.image("expense_example.png", use_column_width=True)
         
-        st.write(f'Your category.csv should have the following column names: Keyword and Category and Keyword-Category pair has to be unique, if duplicated pair are identified, this program will run into error')
+        st.write(f'Your category.csv should have the following column names: Keyword and Category. In addition, Keyword-Category pair has to be unique among the list, if duplicated pair/s are identified from the list, this program will run into error')
         st.image("category_example.png", use_column_width=True)
         
         
