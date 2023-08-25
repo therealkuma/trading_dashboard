@@ -154,6 +154,8 @@ if authentication_status:
                 fig = px.treemap(categorized_df, path=['Category'], values='Amount', color='Amount',
                                  color_continuous_scale='RdBu', title='Expense Amount by Category')
                 
+                st.plotly_chart(fig)
+                
                 # Select category
                 selected_category = st.selectbox("Select a category", categorized_df['Category'].unique())
 
