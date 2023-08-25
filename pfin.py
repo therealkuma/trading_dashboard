@@ -126,7 +126,7 @@ if authentication_status:
                 temp_category_mapping.close()
 
                 expenses_df = pd.read_csv(temp_expenses.name)
-                # expenses_df['Date'] = pd.to_datetime(expenses_df['Date'], dayfirst=True, errors='coerce')
+                expenses_df['Date'] = pd.to_datetime(expenses_df['Date'], infer_datetime_format=True, errors='coerce')
 
 
                 category_mapping_df = pd.read_csv(temp_category_mapping.name)
@@ -141,7 +141,8 @@ if authentication_status:
                 # Categorize expenses
                 categorized_expenses = categorize_expenses(temp_expenses.name, temp_category_mapping.name)
                 categorized_df = pd.DataFrame(categorized_expenses[1:], columns=categorized_expenses[0])
-
+                categorized_df['Date'] = pd.to_datetime(categorized_df['Date'], infer_datetime_format=True, errors='coerce')
+                
                 # Show categorized expenses
                 st.subheader("Categorized Expenses:")
                 st.write(categorized_df)
