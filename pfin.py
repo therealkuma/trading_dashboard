@@ -167,7 +167,9 @@ if authentication_status:
                 else:
                     filtered_categorized_df = categorized_df
                     treemap_title = 'Expense Amount by Category'
-        
+
+                st.write(f'Total: {round(filtered_categorized_df["Amount"].sum(), 2)}')
+                
                 # Create treemap
                 fig = px.treemap(filtered_categorized_df, path=['Category'], values='Amount', color='Amount',
                                  color_continuous_scale='RdBu', title=treemap_title)
