@@ -167,8 +167,16 @@ if authentication_status:
                 else:
                     filtered_categorized_df = categorized_df
                     treemap_title = 'Expense Amount by Category'
-
-                st.write(f'Total: {round(filtered_categorized_df["Amount"].sum(), 2)}')
+                
+                #########SHOW TOTAL OF AMOUNT BY MONTH BUT EXCLUDE AUTOPAY CARD PAYMENT #################
+                # Filter out rows with Description containing "AUTOPAY"
+                filtered_categorized_df_no_autopay = filtered_categorized_df[~filtered_categorized_df['Description'].str.contains("AUTOPAY")]
+                
+                # Calculate the sum of the "Amount" column for the filtered DataFrame
+                total_amount_no_autopay = filtered_categorized_df_no_autopay["Amount"].sum()
+                
+                st.write(f'Total (Excluding AUTOPAY): {round(total_amount_no_autopay, 2)}')
+                ##########################################################################################
                 
                 # Create treemap
                 fig = px.treemap(filtered_categorized_df, path=['Category'], values='Amount', color='Amount',
