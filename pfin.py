@@ -8,6 +8,7 @@ import os
 import plotly.express as px
 import xlrd
 import openpyxl
+import plotly.graph_objects as go
 
 import streamlit as st
 import streamlit_authenticator as stauth
