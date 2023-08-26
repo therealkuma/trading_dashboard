@@ -143,7 +143,26 @@ if authentication_status:
                 categorized_expenses = categorize_expenses(temp_expenses.name, temp_category_mapping.name)
                 categorized_df = pd.DataFrame(categorized_expenses[1:], columns=categorized_expenses[0])
                 categorized_df['Date'] = pd.to_datetime(categorized_df['Date'], infer_datetime_format=True, errors='coerce')
+
+                ############### Add an instructional Youtube video on sidebar ###################
+                # YouTube video ID (the string of characters after "v=" in the YouTube URL)
+                video_id = "a7yLgMALYtw"
                 
+                # YouTube embed code
+                youtube_embed_code = f"""
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>
+                """
+                
+                # Create a bar layout
+                with st.beta_container():
+                    # Add content to the bar
+                    st.write("This is some content above the YouTube video.")
+                    
+                    # Display the YouTube video
+                    st.components.v1.html(youtube_embed_code, height=315)
+                    
+                    # Add more content below the YouTube video
+                    st.write("This is some content below the YouTube video.")
                 
                 ##### Draw bar chart by monthly categorized expense ###################################
                 selected_category = st.selectbox("Select a category", categorized_df['Category'].unique(),index=2)
