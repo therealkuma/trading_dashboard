@@ -182,7 +182,7 @@ if authentication_status:
                 st.plotly_chart(fig)
                 
                 ##### Draw bar chart by monthly categorized expense ###################################
-                selected_category = st.selectbox("Select a category", categorized_df['Category'].unique())
+                selected_category = st.selectbox("Select a category", categorized_df['Category'].unique(),index=2)
 
                 if selected_category:
                     # Filter data for the selected category
