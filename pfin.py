@@ -144,42 +144,6 @@ if authentication_status:
                 categorized_df = pd.DataFrame(categorized_expenses[1:], columns=categorized_expenses[0])
                 categorized_df['Date'] = pd.to_datetime(categorized_df['Date'], infer_datetime_format=True, errors='coerce')
                 
-                # Show categorized expenses
-                st.subheader("Categorized Expenses:")
-                st.write(categorized_df)
-            
-                
-                ######################################## Draw treemap   #####################
-                # fig = px.treemap(categorized_df, path=['Category'], values='Amount', color='Amount',
-                #                  color_continuous_scale='RdBu', title='Expense Amount by Category')
-                
-                # st.plotly_chart(fig)
-
-                # Dropdown selector for categorizing the treemap by month
-                category_by_month = st.selectbox("Categorize Treemap by Month:", ['All Periods'] + list(categorized_df['Date'].dt.to_period('M').unique()))
-        
-                # Modify the treemap title based on the selected month
-                if category_by_month != 'All Periods':
-                    filtered_categorized_df = categorized_df[categorized_df['Date'].dt.to_period('M') == category_by_month]
-                    treemap_title = f'Expense Amount by Category for {category_by_month}'
-                else:
-                    filtered_categorized_df = categorized_df
-                    treemap_title = 'Expense Amount by Category'
-                
-                #########SHOW TOTAL OF AMOUNT BY MONTH BUT EXCLUDE AUTOPAY CARD PAYMENT #################
-                # Filter out rows with Description containing "AUTOPAY"
-                filtered_categorized_df_no_autopay = filtered_categorized_df[~filtered_categorized_df['Description'].str.contains("AUTOPAY")]
-                
-                # Calculate the sum of the "Amount" column for the filtered DataFrame
-                total_amount_no_autopay = filtered_categorized_df_no_autopay["Amount"].sum()
-                
-                st.write(f'Total (Excluding AUTOPAY): {round(total_amount_no_autopay, 2)}')
-                ##########################################################################################
-                
-                # Create treemap
-                fig = px.treemap(filtered_categorized_df, path=['Category'], values='Amount', color='Amount',
-                                 color_continuous_scale='RdBu', title=treemap_title)
-                st.plotly_chart(fig)
                 
                 ##### Draw bar chart by monthly categorized expense ###################################
                 selected_category = st.selectbox("Select a category", categorized_df['Category'].unique(),index=2)
@@ -212,7 +176,44 @@ if authentication_status:
                     total_fig_bar.update_layout(title="Month-to-Month Total Expense Comparison", xaxis_title="Month", yaxis_title="Total Expense", xaxis_tickformat='%b' )
                     total_fig_bar.layout.xaxis.tickvals = pd.date_range('2023-01', '2023-12', freq='MS')
                     st.plotly_chart(total_fig_bar)
+                
+                ######################################## Draw treemap   #####################
+                # fig = px.treemap(categorized_df, path=['Category'], values='Amount', color='Amount',
+                #                  color_continuous_scale='RdBu', title='Expense Amount by Category')
+                
+                # st.plotly_chart(fig)
 
+                # Dropdown selector for categorizing the treemap by month
+                category_by_month = st.selectbox("Categorize Treemap by Month:", ['All Periods'] + list(categorized_df['Date'].dt.to_period('M').unique()))
+        
+                # Modify the treemap title based on the selected month
+                if category_by_month != 'All Periods':
+                    filtered_categorized_df = categorized_df[categorized_df['Date'].dt.to_period('M') == category_by_month]
+                    treemap_title = f'Expense Amount by Category for {category_by_month}'
+                else:
+                    filtered_categorized_df = categorized_df
+                    treemap_title = 'Expense Amount by Category'
+                
+                #########SHOW TOTAL OF AMOUNT BY MONTH BUT EXCLUDE AUTOPAY CARD PAYMENT #################
+                # Filter out rows with Description containing "AUTOPAY"
+                filtered_categorized_df_no_autopay = filtered_categorized_df[~filtered_categorized_df['Description'].str.contains("AUTOPAY")]
+                
+                # Calculate the sum of the "Amount" column for the filtered DataFrame
+                total_amount_no_autopay = filtered_categorized_df_no_autopay["Amount"].sum()
+                
+                st.write(f'Total (Excluding AUTOPAY): {round(total_amount_no_autopay, 2)}')
+                ##########################################################################################
+                
+                # Create treemap
+                fig = px.treemap(filtered_categorized_df, path=['Category'], values='Amount', color='Amount',
+                                 color_continuous_scale='RdBu', title=treemap_title)
+                st.plotly_chart(fig)
+
+                # Show categorized expenses
+                st.subheader("Categorized Expenses:")
+                st.write(categorized_df)
+                ###################################################################
+                
                 # Download categorized expenses as CSV
                 st.markdown(get_table_download_link(categorized_df), unsafe_allow_html=True)
 
