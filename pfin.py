@@ -205,8 +205,7 @@ if authentication_status:
                 ##########################################################################################
                 
                 # Create treemap
-                fig = px.treemap(filtered_categorized_df, path=['Category'], values='Amount', color='Amount',
-                                 color_continuous_scale='RdBu', title=treemap_title)
+                fig = px.treemap(filtered_categorized_df, path=['Category'], values='Amount', title=treemap_title)
                 st.plotly_chart(fig)
 
                 # Show categorized expenses
