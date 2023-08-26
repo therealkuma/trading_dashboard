@@ -107,11 +107,27 @@ if authentication_status:
 
         def main():
             
+            # YouTube video ID (the string of characters after "v=" in the YouTube URL)
+            video_id = "a7yLgMALYtw"
+            
+            # YouTube embed code
+            youtube_embed_code = f"""
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>
+            """
 
             # File upload
             with st.sidebar:
                 expenses_file = st.file_uploader("Upload Expenses CSV file", type=["csv"])
                 category_file = st.file_uploader("Upload Category Mapping CSV file", type=["csv"])
+
+                # Add content to the bar
+                st.write("How to use this app")
+                
+                # Display the YouTube video
+                st.components.v1.html(youtube_embed_code, height=315)
+                
+                # Add more content below the YouTube video
+                st.write("I hope this app makes your life easier !")
 
             if expenses_file is not None and category_file is not None:
                 # Create temporary files
@@ -143,26 +159,6 @@ if authentication_status:
                 categorized_expenses = categorize_expenses(temp_expenses.name, temp_category_mapping.name)
                 categorized_df = pd.DataFrame(categorized_expenses[1:], columns=categorized_expenses[0])
                 categorized_df['Date'] = pd.to_datetime(categorized_df['Date'], infer_datetime_format=True, errors='coerce')
-
-            ############### Add an instructional Youtube video on sidebar ###################
-            # YouTube video ID (the string of characters after "v=" in the YouTube URL)
-            video_id = "a7yLgMALYtw"
-            
-            # YouTube embed code
-            youtube_embed_code = f"""
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>
-            """
-            
-            # Create a bar layout
-            with st.beta_container():
-                # Add content to the bar
-                st.write("How to use this app")
-                
-                # Display the YouTube video
-                st.components.v1.html(youtube_embed_code, height=315)
-                
-                # Add more content below the YouTube video
-                st.write("I hope this app makes your life easier !")
                 
                 ##### Draw bar chart by monthly categorized expense ###################################
                 selected_category = st.selectbox("Select a category", categorized_df['Category'].unique(),index=2)
