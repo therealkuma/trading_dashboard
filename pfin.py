@@ -112,7 +112,7 @@ if authentication_status:
             
             # YouTube embed code
             youtube_embed_code = f"""
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>
+            <iframe width="300" height="190" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>
             """
 
             # File upload
