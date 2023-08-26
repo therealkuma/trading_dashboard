@@ -117,6 +117,7 @@ if authentication_status:
 
             # File upload
             with st.sidebar:
+                st.write("## Upload 2 files to get started")
                 expenses_file = st.file_uploader("Upload Expenses CSV file", type=["csv"])
                 category_file = st.file_uploader("Upload Category Mapping CSV file", type=["csv"])
 
