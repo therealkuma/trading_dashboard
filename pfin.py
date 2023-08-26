@@ -147,10 +147,7 @@ if authentication_status:
                 # Show categorized expenses
                 st.subheader("Categorized Expenses:")
                 st.write(categorized_df)
-                
-                # Show categorized expenses
-                st.subheader("Categorized Expenses:")
-                st.write(categorized_df)
+            
                 
                 ######################################## Draw treemap   #####################
                 # fig = px.treemap(categorized_df, path=['Category'], values='Amount', color='Amount',
@@ -225,9 +222,9 @@ if authentication_status:
 
         def to_excel(df):
             output = BytesIO()
-            writer = pd.ExcelWriter(output, engine='openpyxl')
-            df.to_excel(writer, sheet_name='Sheet1')
-            writer.save()
+            with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                df.to_excel(writer, sheet_name='Sheet1')
+            # writer.save()
             processed_data = output.getvalue()
             return processed_data
 
