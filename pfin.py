@@ -112,7 +112,7 @@ if authentication_status:
             
             # YouTube embed code
             youtube_embed_code = f"""
-            <iframe width="300" height="190" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>
+            <iframe width="330" height="200" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>
             """
 
             # File upload
@@ -124,10 +124,7 @@ if authentication_status:
                 st.write("How to use this app")
                 
                 # Display the YouTube video
-                st.components.v1.html(youtube_embed_code, height=315)
-                
-                # Add more content below the YouTube video
-                st.write("I hope this app makes your life easier !")
+                st.components.v1.html(youtube_embed_code, height=330)
 
             if expenses_file is not None and category_file is not None:
                 # Create temporary files
