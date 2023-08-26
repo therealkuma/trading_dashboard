@@ -195,7 +195,7 @@ if authentication_status:
 
                     # Draw bar chart for month-to-month comparison
                     fig_bar = px.bar(x=monthly_expenses.index.astype(str), y=monthly_expenses.values)
-                    fig_bar.update_layout(title="Month-to-Month Expense Comparison", xaxis_title="Month", yaxis_title="Total Expense", xaxis_tickformat='%b' )
+                    fig_bar.update_layout(title="Month-to-Month Expense Comparison", xaxis_title="Month", yaxis_title = selected_category, xaxis_tickformat='%b' )
 
 
                     st.write(f'Total: {round(category_df["Amount"].sum(), 2)}')
