@@ -100,3 +100,4 @@ alpaca_stream.subscribe_crypto_bars(on_crypto_bar, symbol)
 
 # Start streaming of data
 alpaca_stream.run()
+# b0nc8hufkcp_7zty17yxxxiaAjpVxUsGnAw7y8fMdTeg
