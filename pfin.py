@@ -209,7 +209,8 @@ if authentication_status:
                 
                 #########SHOW TOTAL OF AMOUNT BY MONTH BUT EXCLUDE AUTOPAY CARD PAYMENT #################
                 # Filter out rows with Description containing "AUTOPAY"
-                filtered_categorized_df_no_autopay = filtered_categorized_df[~filtered_categorized_df['Description'].str.contains("AUTOPAY|AUTOMATIC")]
+                # filtered_categorized_df_no_autopay = filtered_categorized_df[~filtered_categorized_df['Description'].str.contains("AUTOPAY|AUTOMATIC")]
+                filtered_categorized_df=filtered_categorized_df[~(filtered_categorized_df['Description'].str.contains("AUTOPAY") | filtered_categorized_df['Description'].str.contains("AUTOMATIC") )]
                 
                 # Calculate the sum of the "Amount" column for the filtered DataFrame
                 total_amount_no_autopay = filtered_categorized_df_no_autopay["Amount"].sum()
